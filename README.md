@@ -17,3 +17,18 @@ pip install micro_prophet-0.1.0-py3-none-any.whl
 ```
 
 MicroProphet is developed under the environment of Python3, and uses Pytorch to build the model. GPU devices are recommended to accelerate model inference.
+
+# Usage
+
+## MicroProphet Pipline
+
+
+## Download models
+
+# Maintainer
+
+| Name | Email | Organization |
+|-------|-------|-------|
+| Yuli Zhang | yulizhang@hust.edu.cn | PhD student, School of Life Science and Technology, Huazhong University of Science & Technology |
+| Kouyi Zhou | zhoukouyi@hust.edu.cn | PhD student, School of Life Science and Technology, Huazhong University of Science & Technology |
+| Kang Ning  | ningkang@hust.edu.cn | Professor, School of Life Science and Technology, Huazhong University of Science & Technology|
