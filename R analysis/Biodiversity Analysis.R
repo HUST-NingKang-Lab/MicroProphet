@@ -1,10 +1,9 @@
-setwd("C:/Users/chudongliang/Desktop/invasion")
 library(readr)
 library(readxl)
 library(tidyverse)
 library(ggplot2)
-library(ade4)   # 用于计算PcoA
-library(vegan)# 用于计算距离
+library(ade4)   
+library(vegan)
 library(ggsci)
 library(gridExtra)
 library(patchwork)
