@@ -37,10 +37,10 @@ Below is an example of how the data is structured:
 
 | subject_id | time | Actinobact | Alphaprot | Bacilli | Bacteroidi | Betaprote | Clostridi | Cyanobact | Epsilonprc | ... |
 |------------|------|------------|-----------|---------|------------|-----------|-----------|-----------|------------|-----|
-| 41         | 3    | 0.0024976  | 0.000084  | 0.038825| 0          | 0         | 0.000282  | 0         | 0          | ... |
-| 42         | 3    | 0.0023478  | 0.000076  | 0.038825| 0          | 0         | 0.000235  | 0         | 0          | ... |
-| 43         | 3    | 0.0032016  | 0.000545  | 0       | 0          | 0         | 0.000193  | 0         | 0          | ... |
-| 44         | 3    | 0.0026768  | 4.32E-06  | 0       | 0          | 0         | 0.000183  | 0         | 0          | ... |
+| 41         | 1    | 0.0024976  | 0.000084  | 0.038825| 0          | 0         | 0.000282  | 0         | 0          | ... |
+| 42         | 1    | 0.0023478  | 0.000076  | 0.038825| 0          | 0         | 0.000235  | 0         | 0          | ... |
+| 43         | 1    | 0.0032016  | 0.000545  | 0       | 0          | 0         | 0.000193  | 0         | 0          | ... |
+| 44         | 1    | 0.0026768  | 4.32E-06  | 0       | 0          | 0         | 0.000183  | 0         | 0          | ... |
 | ...        | ...  | ...        | ...       | ...     | ...        | ...       | ...       | ...       | ...        | ... |
 
 **Output**: The output consists of two datasets:
@@ -49,15 +49,111 @@ Below is an example of how the data is structured:
 
 These sets are divided based on the subject IDs to ensure that each subject is assigned either to the training or the test set. 
 
+
 **Example:**
 
 ```bash
 mph split ./data/invasion.csv --export_path="./data"
 ```
 
+## Predict future microbial time-series abundance
+
+- **Predict**: The model is trained on the time-series data of microbial abundance from the training set (70% of the subjects). The model learns the temporal dependencies between microbial abundance and time. Once trained, the model can forecast the future abundance of microbial species. This forecast is based on the time series and includes the next time points (e.g., next weeks, months, or other time intervals).
+
+**Example:**
+
+```bash
+mph predict ./data/invasion.csv --export_path="./result" 
+```
+
+**Output**:
+   The command will generate two main outputs:
+   
+   - **Predicted Microbial Abundance Table**:
+     This table contains the predicted microbial abundances for the future time points, formatted similarly to the input data, but with time points continuing beyond the training data.
+
+     Example of the predicted output:
+
+     | subject_id | time | Actinobact (Predicted) | Alphaprot (Predicted) | Bacilli (Predicted) | ... |
+     |------------|------|-----------------------|-----------------------|---------------------|-----|
+     | 41          | 4    | 0.003152              | 0.000215              | 0.041278            | ... |
+     | 42          | 4    | 0.003452              | 0.000175              | 0.039812            | ... |
+     | 43          | 4    | 0.003829              | 0.000301              | 0.038613            | ... |
+
+   - **Evaluation Metrics Table**:
+     This table includes various evaluation metrics that assess the accuracy of the model's predictions, such as:
+     - **Pearson Correlation Coefficient**: Measures the linear relationship between predicted and actual values.
+     - **RMSE (Root Mean Squared Error)**: Measures the average magnitude of the prediction errors.
+     
+**Notes**:
+- This model is useful for forecasting microbial dynamics over time, enabling better planning and management in microbiome studies or applications.
+
+## Output attention heatmap
+
+- **Attention Heatmap**: This heatmap visualizes how different time points influence each other in terms of microbial species abundance. The model calculates the attention scores to highlight the interaction between time points, showing how the abundance of species at one time point affects future time points.
+
+**Example:**
+
+```bash
+mph attention ./data/invasion.csv --export_path="./result"
+```
+
+## Output SHAP Values for Species Importance
+
+**Example:**
+
+```bash
+mph shap ./data/invasion.csv --export_path="./result"
+```
+
+- **SHAP Analysis**: SHAP values explain the contribution of each species to the model's predictions.
+
+Example of the generated SHAP results table:
+
+| Species        | SHAP Value (Importance) |
+|----------------|-------------------------|
+| Actinobact     | 0.0054                  |
+| Alphaprot      | 0.0032                  |
+| Bacilli        | 0.0015                  |
+| Bacteroidi     | 0.0023                  |
+| Betaprote      | 0.0009                  |
+| ...            | ...                     |
+
+# Dependencies 
+
+## Microprophet Project Configuration
+
+This document outlines the configuration for the **Microprophet** project, including the build system, project details, dependencies, and scripts.
+
+## Build System
+
+The project requires `setuptools` version `76.0.0` to build:
+
+```toml
+[build-system]
+requires = ["setuptools==76.0.0"]
+
+[project]
+name = "microprophet"
+version = "1.1.0"
+description = "microprophet project"
+readme = "README.md"
+requires-python = ">=3.9.5,<3.10"
+dependencies = [
+    "accelerate>=1.5.2",
+    "matplotlib>=3.9.4",
+    "numba==0.59.1",
+    "numpy==1.26.4",
+    "pandas>=2.2.3",
+    "shap>=0.46.0",
+    "torch>=2.6.0",
+    "transformers>=4.49.0",
+]
+---
+
+## Parameter description
 
 
-## Download models
 
 # Maintainer
 
