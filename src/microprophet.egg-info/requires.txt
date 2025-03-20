@@ -1,0 +1,8 @@
+accelerate>=1.5.2
+matplotlib>=3.9.4
+numba==0.59.1
+numpy==1.26.4
+pandas>=2.2.3
+shap>=0.46.0
+torch>=2.6.0
+transformers>=4.49.0

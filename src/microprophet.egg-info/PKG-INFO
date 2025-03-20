@@ -1,0 +1,61 @@
+Metadata-Version: 2.2
+Name: microprophet
+Version: 1.1.0
+Summary: microprophet project
+Requires-Python: <3.10,>=3.9.5
+Description-Content-Type: text/markdown
+Requires-Dist: accelerate>=1.5.2
+Requires-Dist: matplotlib>=3.9.4
+Requires-Dist: numba==0.59.1
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: shap>=0.46.0
+Requires-Dist: torch>=2.6.0
+Requires-Dist: transformers>=4.49.0
+
+#### 安装microprophet
+
+```
+cd microprophet源码的目录
+pip install .
+```
+
+#### 使用microprophet
+
+##### 训练和预测并且输出结果
+
+```
+mph predict ./data/invasion.csv --export_path="./result" 
+```
+
+##### 训练和输出热力图
+
+```
+mph attention ./data/invasion.csv --export_path="./result"
+```
+
+##### 训练和输出shap参数
+
+```
+mph shap ./data/invasion.csv --export_path="./result"
+```
+
+##### 分割数据集
+
+```
+mph split ./data/invasion.csv --export_path="./data"
+```
+
+##### 其他参数
+
+```
+--export_split
+```
+
+在有训练的模式中启用可以在export_path中导出拆分的数据集
+
+```
+--export_model
+```
+
+在有训练的模式中启用可以在export_path中导出最好的模型参数
