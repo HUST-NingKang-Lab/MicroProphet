@@ -149,10 +149,28 @@ dependencies = [
     "torch>=2.6.0",
     "transformers>=4.49.0",
 ]
----
+```
+# Others
 
 ## Parameter description
 
+- **num_epoch**: The number of iterations to train the model. Controls how many times the entire dataset is processed during training.
+
+- **lr**: The learning rate during training. It controls how quickly the model adapts to the data during training.
+
+- **context_length**: The length of historical time steps used by the model to predict future values.
+
+- **future_steps**: The number of future time points the model is expected to predict.
+
+- **nhead**: The number of attention heads in the multi-head attention mechanism of the model, used in transformer-based architectures.
+
+- **train_batch_size**: The number of samples processed per batch during training.
+
+- **num_train_epochs**: The number of epochs (iterations over the entire dataset) during training.
+
+- **evaluation_strategy**: Defines when to evaluate the model during training, e.g., after each epoch.
+
+- **early_stopping_patience**: The number of epochs with no improvement in evaluation results before stopping the training to avoid overfitting.
 
 
 # Maintainer
